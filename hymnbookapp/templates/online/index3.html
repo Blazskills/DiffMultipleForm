@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .ingredient-form{
+            border-bottom: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        {% if formset.non_form_errors %}
+          <div class="alert alertdanger">{{formset.non_form_errors}}</div>
+        {% endif %}
+  <!-- {{ formset.management_form }} -->
+
+ 
+      {% if formset %}
+
+      <h1>Membership Form</h1>
+      {% for form in formset%}
+
+      <div class="ingredient-form">
+          {{form.as_p}}
+      </div>
+      {%endfor%}
+
+{%endif%}
+
+  <input type="hidden" value="false" name="additems" id="additems">
+  <button  class="btn btn-primary" id="additemsbutton">Add items to order</button>
+  <input type="submit" value="Submit order" class="btn btn-primary">  
+</form>
+<script>
+    const additem= document.getElementById("additems");
+    document.getElementById("additemsbutton").addEventListener("click", myFunction);
+    
+    function myFunction() {
+        additem.setAttribute('value','true');
+        //$("#additems").val("true");
+    }
+    </script>
+</body>
+</html>
+
+

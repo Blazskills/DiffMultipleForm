@@ -1,0 +1,246 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} WorkBench | Create Warehouse Stock Position {% endblock %}
+{% block subheader %} Create Warehouse Stock Position {% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'warehouse_stock_create/styles/build.css'%}">
+<style>
+    hr.new3 {
+border-top: 1px dashed #E2E6E9;
+}
+
+         #customers {
+             border-collapse: collapse;
+             width: 100%;
+             background: #fff;
+             height: 402.41px;
+         }
+
+
+
+         #customers td,
+         #customers th {
+             text-align: center;
+
+             padding: 8px;
+         }
+
+         #customers tr:nth-child(even) {
+             background-color: #fff;
+         }
+
+         #customers tr:hover {
+             background-color: #ddd;
+         }
+
+         #customers th {
+             padding-top: 12px;
+             padding-bottom: 12px;
+             text-align: center;
+             background-color: #656C6C;
+             color: #fff;
+         }
+
+     </style>
+
+
+        <!-- begin:: Content -->
+
+        <main class="flex min-h-screen min-w-screen bg-[#FAFBFC]">
+
+
+            <section id="content" class="flex flex-col max-h-screen w-full px-6 mx-auto overflow-x-auto">
+
+                <div class="my-6 flex flex-row items-center p-4">
+                    <h1 class="text-[21px] text-[#000] font-medium"><a href="index.html" class="text-[#000]">Create
+                            Warehouse Stock Position | </a> </h1>
+                            
+                    <img src="{% static 'warehouse_stock_create/public/icons/healthicons_home-alt-outline.svg' %}" alt="logo" />
+                    <h1> - Warehouse Stock Position</h1>
+
+                </div>
+
+                <div class="justify-left p-4 font-semibold">
+                    <p class=" text-xl ">Warehouse</p><br>
+                    <div class="border">
+                        <select class="form-control mx-select w-[1185px] h-[52px] bg-[#F9F7F7] p-3" id="id_warehouse"
+                        name="warehouse" data-col-index="3">
+                    <option value="" disabled>Select Warehouse</option>
+                    {% for warehouse in warehouses %}
+                        <option value="{{ warehouse.code }}"
+                                {% if warehouse.code == request.GET.warehouse %}
+                                selected
+                                {% endif %}> {{ warehouse.name }}</option>
+                    {% endfor %}
+                </select>
+                    </div>
+                </div>
+
+
+                <!---Table Begins-->
+
+                <div class="p-4">
+                    <form class="m-form" method="POST" action=""
+                    id="create_warehouse_stock" novalidate>
+                  {% csrf_token %}
+                    <div class="p-3 bg-white border ">
+                        <table id="customers" cellspacing = "5">
+                            <tbody id="ingredient-form-list">
+                            <tr class=" items-center">
+                                <th>#</th>
+                                <th>Items</th>
+                                <th>Grades</th>
+                                <th>Bags</th>
+                                <th>Weight (kg)</th>
+                                <th>Comments</th>
+                                <th></th>
+                            </tr>
+                          
+                            <p></p>
+                            {% for w_inven in warehouse_inventory %}
+                            <tr>
+                                <td></td>
+                              
+                                <td >
+                                    <!-- <div class=" "> -->
+                                        <select name='items'  class="bg-[#fff] text-[#999CA0] rounded-md border-2  border-[#656C6C] w-[256px] h-[40px]">
+                                            <option select='selected' value="{{w_inven.item}}">{{w_inven.item__product__name}}</option>                       
+                                        </select>
+                                 </td>
+                             <td>
+                                
+                                <select name='grade' class="bg-[#fff] text-[#999CA0] rounded-md border-2  border-[#656C6C] w-[102px] h-[40px]">
+                                    {% comment %} <option selected>Grade</option> {% endcomment %}
+                                    <option select='selected' value="{{w_inven.grade}}">G{{w_inven.grade}}</option>
+                                    {% comment %} <option>G3</option> {% endcomment %}
+                                </select>
+                                
+                              </td>
+                                <td> <input type="text" name="bag" placeholder="0"
+                                        class=" w-[148px] h-[40px] rounded-md border border-[#656C6C] p-2" /></td>
+                                <td> <input type="text" name="weight" placeholder="0.00"
+                                        class=" w-[148px] h-[40px] rounded-md border border-[#656C6C] p-2" /></td>
+                                <td> <input type="text" name="comment"
+                                        class=" w-[333.97px] h-[40px] rounded-md border border-[#656C6C]" /></td>
+                                        {% comment %} <td>
+                                            <img src="{% static 'warehouse_stock_create/public/icons/trash.svg' %}"/>
+                                        </td> {% endcomment %}
+                            </tr>
+                            {% endfor %}
+
+                            <!--Empty Table for add More -->
+                            <tr id="empty-table">
+                                <td></td>
+                              
+                                <td >
+                                    <!-- <div class=" "> -->
+                                        <select name='items'  class="bg-[#fff] text-[#999CA0] rounded-md border-2  border-[#656C6C] w-[256px] h-[40px]">
+                                            <option selected disabled>Select New Item</option>                       
+                                         {% for all_tenants_item  in all_tenants_items  %}
+                                         <option value="{{all_tenants_item.id}}">{{all_tenants_item}}</option>
+                                         {% endfor %}
+                                            
+                                        </select>
+                                 </td>
+                             <td>
+                                
+                                <select name='grade' class="bg-[#fff] text-[#999CA0] rounded-md border-2  border-[#656C6C] w-[102px] h-[40px]">
+                                    <option disabled selected>Grade</option>
+                                    <option value="1">G1</option>
+                                    <option value="2">G2</option>
+                                    <option value="3">G3</option>
+
+                                </select>
+                                
+                              </td>
+                                <td> <input type="text" name="bag" placeholder="0"
+                                        class=" w-[148px] h-[40px] rounded-md border border-[#656C6C] p-2" /></td>
+                                <td> <input type="text" name="weight" placeholder="0.00"
+                                        class=" w-[148px] h-[40px] rounded-md border border-[#656C6C] p-2" /></td>
+                                <td> <input type="text" name="comment"
+                                        class=" w-[333.97px] h-[40px] rounded-md border border-[#656C6C]" /></td>
+                                        <td>
+                                            <img src="{% static 'warehouse_stock_create/public/icons/trash.svg' %}"/>
+                                        </td>
+                            </tr>
+                            <!--Empty Table for add More -->
+                            </tbody>
+                        </table>
+
+                        <div class="flex flex-row p-6" id="add-more">
+                            <img src="{% static 'warehouse_stock_create/public/icons/add.svg'%}"/>
+                            <p  class="text-[17px] text-[#0089C8] font-medium">Add Item</p>
+                        </div>
+
+                        <div>
+                            <hr class="new3 p-4">
+                        </div>
+                       <div class="flex flex-row justify-between p-4">
+                           <button class="bg-[#E2E6E9] text-[#656C6C] w-[57px] h-[40px] rounded-md">Back</button>
+                           <button type="submit" class=" bg-[#DC372F] text-[#fff] w-[130px] h-[40px] rounded-md" >Save and Close</button>
+                       </div>
+                    </div>
+                </form>
+                </div>
+
+          
+            </section>
+
+
+
+
+
+        </main>
+
+
+    <!-- content end-->
+
+    </div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    $('#id_warehouse').on('change', function () {
+        location.href = "{% url 'audit:create_warehouse_audit2' %}?warehouse=" + this.value;
+
+    });
+   
+</script>
+
+
+<script>
+
+const addMoreBtn = document.getElementById('add-more')
+addMoreBtn.addEventListener('click', function (e) {
+    const emptyFormEl = document.getElementById('empty-table').cloneNode(true);
+    const formCopyTarget = document.getElementById('ingredient-form-list');
+
+    
+
+    formCopyTarget.appendChild(emptyFormEl);
+    //now add new empty table element to our existing table
+})
+
+</script>
+{% endblock %}
+
+
+{% comment %} {% for w_items in all_tenants_items %}
+<option value="{{w_items.id}}">{{w_items}}</option>
+   
+{% endfor %} {% endcomment %}
+
+
+
+
+
+
+{% comment %} <script>
+
+const addMoreBtn = document.getElementById('add-more')
+addMoreBtn.addEventListener('click', add_new_form) 
+function add_new_form(args) {
+    console.log(args);
+}
+</script> {% endcomment %}

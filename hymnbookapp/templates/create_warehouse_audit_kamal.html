@@ -1,0 +1,218 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %} WorkBench | Create Warehouse Stock Position {% endblock %}
+{% block subheader %} Create Warehouse Stock Position {% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'warehouse_stock_create/styles/build.css'%}">
+<style>
+    hr.new3 {
+border-top: 1px dashed #E2E6E9;
+}
+
+         #customers {
+             border-collapse: collapse;
+             width: 100%;
+             background: #fff;
+             height: 402.41px;
+         }
+
+
+
+         #customers td,
+         #customers th {
+             text-align: center;
+
+             padding: 8px;
+         }
+
+         #customers tr:nth-child(even) {
+             background-color: #fff;
+         }
+
+         #customers tr:hover {
+             background-color: #ddd;
+         }
+
+         #customers th {
+             padding-top: 12px;
+             padding-bottom: 12px;
+             text-align: center;
+             background-color: #656C6C;
+             color: #fff;
+         }
+
+     </style>
+
+
+        <!-- begin:: Content -->
+
+        <main class="flex min-h-screen min-w-screen bg-[#FAFBFC]">
+
+
+            <section id="content" class="flex flex-col max-h-screen w-full px-6 mx-auto overflow-x-auto">
+
+                <div class="my-6 flex flex-row items-center p-4">
+                    <h1 class="text-[21px] text-[#000] font-medium"><a href="index.html" class="text-[#000]">Create
+                            Warehouse Stock Position | </a> </h1>
+                    <img src="{% static 'warehouse_stock_create/public/icons/healthicons_home-alt-outline.svg' %}" alt="logo" />
+                    <h1> - Warehouse Stock Position</h1>
+
+                </div>
+
+                <div class="justify-left p-4 font-semibold">
+                    <p class=" text-xl ">Warehouse</p><br>
+                    <div class="border">
+                        <select class="form-control mx-select w-[1185px] h-[52px] bg-[#F9F7F7] p-3" id="id_warehouse"
+                        name="warehouse" data-col-index="3">
+                    <option value="">Select Warehouse</option>
+                    {% for warehouse in warehouses %}
+                        <option value="{{ warehouse.code }}"
+                                {% if warehouse.code == request.GET.warehouse %}
+                                selected="selected"
+                                {% endif %}> {{ warehouse.name }}</option>
+                    {% endfor %}
+                </select>
+                    </div>
+                </div>
+
+
+                <!---Table Begins-->
+
+                <div class="p-4">
+                    <div class="p-3 bg-white border ">
+                        
+                            <div id="create_form"> 
+                                {% if warehouse_weekly_formset %}
+                                <form action="{% url 'audit:create_warehouse_audit' %}?warehouse={{ request.GET.warehouse }}" method="post" id="create_warehouse_stock" novalidate>
+                                    {% csrf_token %}
+                                    {{ warehouse_weekly_formset.management_form }}
+                                    <div class="form-set">
+                                        {% for form in warehouse_weekly_formset %}
+                                        {% comment %} {% for field in form.visible_fields %} {% endcomment %}
+                                          
+
+                                         <div class="row">
+                                                    {% for field in form.visible_fields %}
+                                                        <div class="col-sm-12 col-md-4 form-group kt-padding-r-50 kt-padding-l-50">
+                                                            <label for="{{ field.name }}">
+                                                                {{ field.label|safe }}
+                                                                {% if field.field.required %}
+                                                                    <span class="required">*</span>
+                                                                {% endif %}
+                                                            </label>
+                                                            <div class="kt-form__control">
+                                                                {{ field }}
+                                                                <span class="kt-form__help">{{ field.errors }}</span>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+
+                                                    {% for hidden in form.hidden_fields %}
+                                                        {{ hidden }}
+                                                    {% endfor %}
+                                                    
+                                                </div>
+
+
+
+
+                                        {% endfor %}
+                                        {% comment %} {% endfor %} {% endcomment %}
+                                    </div>
+                                 
+
+                                </form>
+                              
+                                {% endif %}
+                            </div>
+
+                        <div class="flex flex-row p-6" id="add-form-row">
+                            <img src="{% static 'warehouse_stock_create/public/icons/add.svg'%}"/>
+                            <p class="text-[17px] text-[#0089C8] font-medium">Add Item</p>
+
+                        </div>
+
+                        {% for field in comment_form %}
+                        <div class="kt-form__group">
+                            <label for="extra_note">General Remark</label>
+                            <div class="kt-form__control">
+                                <textarea name="extra_note" cols="40" rows="10" class="form-control" required="" id="id_extra_note" spellcheck="false"></textarea>
+                                <span class="kt-form__help"></span>
+                            </div>
+                        </div>
+                        <div>
+                            {% endfor %}
+                            
+                            <!-- <hr class="new3 p-4"> -->
+                        </div>
+                       <div class="flex flex-row justify-between p-4">
+                           <button class="bg-[#E2E6E9] text-[#656C6C] w-[57px] h-[40px] rounded-md">Back</button>
+                           <button type="submit" class=" bg-[#DC372F] text-[#fff] w-[130px] h-[40px] rounded-md" >Save and Close</button>
+                       </div>
+                    </div>
+                </div>
+
+
+            </section>
+
+        </main>
+
+
+    <!-- content end-->
+
+    </div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+
+    var prefix = 'warehouseweeklystock_set';
+    jQuery(document).ready(function () {
+        var arrows;
+        if (KTUtil.isRTL()) {
+            arrows = {
+                leftArrow: '<i class="la la-angle-right"></i>',
+                rightArrow: '<i class="la la-angle-left"></i>'
+            }
+        } else {
+            arrows = {
+                leftArrow: '<i class="la la-angle-left"></i>',
+                rightArrow: '<i class="la la-angle-right"></i>'
+            }
+        }
+        /*
+                    // enable clear button
+                    $('#
+
+
+
+
+
+
+        {{ form.date.id_for_label }}').datepicker({
+            rtl: KTUtil.isRTL(),
+            todayHighlight: true,
+            orientation: "bottom left",
+            templates: arrows
+        });
+        */
+    });
+</script>
+<script src="{% static 'classic/assets/js/demo12/jqueryformset.js' %}" type="text/javascript"></script>
+
+<script>
+    $('#id_warehouse').on('change', function () {
+        location.href = "{% url 'audit:create_warehouse_audit' %}?warehouse=" + this.value;
+
+    });
+    {% if warehouse_weekly_formset %}
+        $('.form-set').formset({
+            prefix: 'warehouseweeklystock_set'
+        });
+    {% endif %}
+    function submit_form() {
+        $('#create_warehouse_stock').submit();
+    }
+</script>
+{% endblock %}

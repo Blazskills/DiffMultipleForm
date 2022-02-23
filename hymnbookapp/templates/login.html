@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Snippet - BBBootstrap</title>
+    <link href="" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <script type="text/javascript" src=""></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eee;
+      }
+
+      .container .card {
+        height: 530px;
+        width: 800px;
+        background-color: #fff;
+        position: relative;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        font-family: "Poppins", sans-serif;
+      }
+
+      .container .card .form {
+        width: 100%;
+        height: 100%;
+        display: flex;
+      }
+
+      .container .card .left-side {
+        width: 50%;
+        background-color: #fff;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .left-side img {
+        box-sizing: border-box;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+
+      .container .card .right-side {
+        width: 50%;
+        background-color: #fff;
+        height: 100%;
+        padding: 20px;
+      }
+
+      .heading h3 {
+        letter-spacing: 1px;
+      }
+
+      .heading p {
+        margin-top: 5px;
+        font-size: 12px;
+        color: #898989;
+      }
+
+      .social {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .social span {
+        height: 40px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .social span i {
+        font-size: 13px;
+        margin-right: 4px;
+        margin-top: 2px;
+        color: #0669e3;
+      }
+
+      .right-side hr {
+        margin-top: 20px;
+      }
+
+      .right-side p {
+      }
+
+      .or {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -8px;
+      }
+
+      .or p {
+        background-color: #fff;
+        padding: 0 4px;
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      .input-text {
+        position: relative;
+        margin-top: 20px;
+        width: 100%;
+      }
+
+      input[type="text"] {
+        height: 45px;
+        width: 100%;
+        border: none;
+        border-radius: 7px;
+        background-color: #f5f5f5;
+        outline: 0;
+        padding: 0 10px;
+        font-size: 13px;
+        padding-left: 30px;
+      }
+
+      input[type="password"] {
+        height: 45px;
+        width: 100%;
+        border: none;
+        border-radius: 7px;
+        background-color: #f5f5f5;
+        outline: 0;
+        padding: 0 10px;
+        font-size: 13px;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+
+      .input-text label {
+        position: absolute;
+        left: 30px;
+        top: 15px;
+        font-size: 12px;
+        pointer-events: none;
+        transition: all 0.5s;
+      }
+
+      .input-text i {
+        position: absolute;
+        top: 17px;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      .input-text .fa-envelope {
+        left: 8px;
+      }
+
+      .input-text .fa-lock {
+        position: absolute;
+        left: 8px;
+        font-size: 14px;
+      }
+
+      .input-text .fa-eye-slash {
+        position: absolute;
+        right: 10px;
+      }
+
+      .input-text .fa-eye {
+        position: absolute;
+        right: 10px;
+      }
+
+      .input-text input:focus ~ label,
+      .input-text input:valid ~ label {
+        top: 2px;
+        font-size: 10px;
+        font-weight: 600;
+      }
+
+      .rem_pass {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .remember {
+        display: flex;
+        align-items: center;
+      }
+
+      .remember span {
+        height: 25px;
+        width: 25px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.5s;
+      }
+
+      .remember p {
+        font-size: 12px;
+        margin-left: 5px;
+        font-weight: 700;
+      }
+
+      .rem_pass a {
+        font-size: 12px;
+        color: blue;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .button button {
+        height: 40px;
+        width: 100%;
+        background-color: #ff805d;
+        border: none;
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 12px;
+        transition: all 0.5s;
+      }
+
+      .button button:hover {
+        background-color: #e33606;
+      }
+
+      .register {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .register p {
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      .register a {
+        color: blue;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .warning {
+        border: 1px solid red !important;
+      }
+
+      .green {
+        background-color: green !important;
+      }
+
+      .text-warning {
+        border: 1px solid red !important;
+      }
+
+      @media (max-width: 750px) {
+        .container .card {
+          max-width: 350px;
+          height: auto;
+        }
+
+        .container .card .right-side {
+          width: 100%;
+        }
+
+        .container .card .left-side {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body oncontextmenu="return false" class="snippet-body">
+    <div id="root"></div>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/react/umd/react.development.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/react-dom/umd/react-dom.development.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/@babel/standalone/babel.min.js"
+    ></script>
+    <script type="text/babel">
+      const LogIn = () => {
+        const { useState } = React;
+
+        const [eye, seteye] = useState(true);
+        const [inpass, setinpass] = useState("password");
+        const [warning, setwarning] = useState(false);
+        const [tick, settick] = useState(false);
+
+        const [inputText, setInputText] = useState({
+          email: "",
+          password: "",
+        });
+
+        const [wemail, setwemail] = useState(false);
+        const [wpassword, setwpassword] = useState(false);
+
+        const Eye = () => {
+          if (inpass == "password") {
+            setinpass("text");
+            seteye(false);
+            setwarning(true);
+          } else {
+            setinpass("password");
+            seteye(true);
+            setwarning(false);
+          }
+        };
+
+        const Tick = () => {
+          if (tick) {
+            settick(false);
+          } else {
+            settick(true);
+          }
+        };
+
+        const inputEvent = (event) => {
+          const name = event.target.name;
+          const value = event.target.value;
+          setInputText((lastValue) => {
+            return {
+              ...lastValue,
+              [name]: value,
+            };
+          });
+        };
+
+        const submitForm = (e) => {
+          e.preventDefault();
+
+          setwemail(false);
+          setwpassword(false);
+          if (inputText.email == "") {
+            setwemail(true);
+          } else if (inputText.password == "") setwpassword(true);
+          else {
+            alert("form submitted");
+          }
+        };
+
+        return (
+          <>
+            <div className="container">
+              <div className="card">
+                <div className="form">
+                  <div className="left-side">
+                    <img src="https://imgur.com/K230JeW.jpg" />
+                  </div>
+                  <div className="right-side">
+                    <div className="heading">
+                      <h3>Log in here.</h3>
+                      <p>
+                        Welcome Back! login with your data that you entered
+                        during registration.
+                      </p>
+                    </div>
+                    <div className="social">
+                      <span>
+                        <i className="fa fa-google"></i>Log in with Google
+                      </span>
+                      <span>
+                        <i className="fa fa-facebook-f"></i>Log in with Facebook
+                      </span>
+                    </div>
+                    <hr />
+                    <div className="or">
+                      <p>or</p>
+                    </div>
+                    <form onSubmit={submitForm}>
+                      <div className="input-text">
+                        <input
+                          type="text"
+                          className={`${wemail ? "text-warning" : ""}`}
+                          value={inputText.email}
+                          onChange={inputEvent}
+                          name="email"
+                        />
+                        <label>Email</label>
+                        <i className="fa fa-envelope"></i>
+                      </div>
+                      <div className="input-text">
+                        <input
+                          type={inpass}
+                          className={` ${warning ? "warning" : ""} ${
+                            wpassword ? "text-warning" : ""
+                          }`}
+                          value={inputText.password}
+                          onChange={inputEvent}
+                          name="password"
+                        />
+                        <label>Password</label>
+                        <i className="fa fa-lock"></i>
+                        <i
+                          onClick={Eye}
+                          className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}
+                        ></i>
+                      </div>
+
+                      <div className="rem_pass">
+                        <div className="remember">
+                          <span
+                            onClick={Tick}
+                            className={` ${tick ? "green" : ""}`}
+                          >
+                            <i className="fa fa-check"></i>
+                          </span>
+                          <p>Remember Me</p>
+                        </div>
+                        <a href="#">Forgot your password?</a>
+                      </div>
+                      <div className="button">
+                        <button type="submit">Login</button>
+                      </div>
+                    </form>
+                    <div className="register">
+                      <p>
+                        Didn't have an account?<a href="#"> Register</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        );
+      };
+      ReactDOM.render(<LogIn />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
